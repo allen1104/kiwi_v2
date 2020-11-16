@@ -7,6 +7,9 @@
       <el-form-item label="描述">
         <el-input v-model="form.description" placeholder="描述"></el-input>
       </el-form-item>
+      <el-form-item label="首页展示图片地址">
+        <el-input v-model="form.titleUrl" placeholder="首页展示图片地址"></el-input>
+      </el-form-item>
       <el-form-item label="内容">
         <div id="demo1"></div>
       </el-form-item>
@@ -17,12 +20,6 @@
       <el-button @click="submit">取消发布</el-button>
       <el-button @click="goback">返回</el-button>
     </div>
-
-    <!-- <h3>内容</h3> -->
-
-    <!-- <button type="button" class="btn" @click="getEditorData">获取当前内容</button> -->
-    <!-- <h3>内容预览</h3> -->
-    <!-- <textarea name="" id="" cols="170" rows="20" readonly v-model="editorData"></textarea> -->
   </div>
 </template>
 
@@ -37,6 +34,7 @@ export default {
         id: null,
         title: null,
         description: null,
+        titleUrl: null,
         content: null,
       },
       editor: null,

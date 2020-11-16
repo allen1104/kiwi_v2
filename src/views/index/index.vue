@@ -1,5 +1,5 @@
 <template>
-  <el-container style="border: 1px solid #eee">
+  <el-container style="border: 1px solid #eee; background-color:#f9fbe4;">
     <el-container>
          <el-header>
            <Header/>
