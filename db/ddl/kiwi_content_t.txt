@@ -1,0 +1,9 @@
+create table kiwi_content_t(
+id Integer primary key auto_inrement comment '主键id',
+biz_id integer comment '业务id',
+content text comment '文本内容',
+created_by number(20) COMMENT '创建人',
+created_date date COMMENT '创建时间',
+last_updated_by number(20) COMMENT '最后更新人',
+last_updated_date date COMMENT '最后更新时间'
+)

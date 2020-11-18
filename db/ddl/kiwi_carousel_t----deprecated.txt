@@ -1,0 +1,11 @@
+create table kiwi_carousel_t(
+id Integer PRIMARY KEY AUTO_INCREMENT COMMENT '主键',
+title varchar2(200) COMMENT '标题',
+title_url varchar2(1000) COMMENT '标题连接',
+content_id Integer COMMENT '文档id',
+status char(1) COMMENT '状态',
+created_by number(20) COMMENT '创建人',
+created_date date COMMENT '创建时间',
+last_updated_by number(20) COMMENT '最后更新人',
+last_updated_date date COMMENT '最后更新时间'
+)COMMENT '滚动表'
