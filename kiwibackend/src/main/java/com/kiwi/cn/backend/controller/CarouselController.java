@@ -2,7 +2,7 @@ package com.kiwi.cn.backend.controller;
 
 import com.kiwi.cn.backend.common.service.impl.ServiceResult;
 import com.kiwi.cn.backend.constant.KiwiCommenConstants;
-import com.kiwi.cn.backend.service.api.NewsService;
+import com.kiwi.cn.backend.service.api.CarouselService;
 import com.kiwi.cn.backend.vo.NewsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@Api(tags = "新闻接口")
+@Api(tags = "滚动接口")
 @RestController
-@RequestMapping("/news")
-public class NewsController {
+@RequestMapping("/carousel")
+public class CarouselController {
 
     @Autowired
-    NewsService service;
+    CarouselService service;
 
     @Operation(summary = "分页查询")
     @PostMapping(path = "findPageList")
@@ -48,7 +48,7 @@ public class NewsController {
 
     @Operation(summary = "删除")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "新闻主键id", required = true, dataType = "Integer", paramType = "path", example = "1"),
+            @ApiImplicitParam(name = "id", value = "主键id", required = true, dataType = "Integer", paramType = "path", example = "1"),
     })
     @DeleteMapping("/{id}")
     public ServiceResult delete(@PathVariable Integer id) {
@@ -56,10 +56,10 @@ public class NewsController {
         return ServiceResult.success();
     }
 
-    @Operation(summary = "首页展示查询")
+    @Operation(summary = "首页展示查询，展示数量：")
     @GetMapping("/index")
     public ServiceResult getIndex(@PathVariable Integer id) {
-        Pageable pageable = PageRequest.of(0, KiwiCommenConstants.SUCCESS);
+        Pageable pageable = PageRequest.of(0, KiwiCommenConstants.INDEX_SHOW_COUNT);
         return ServiceResult.success(service.findPageList(pageable));
     }
 }

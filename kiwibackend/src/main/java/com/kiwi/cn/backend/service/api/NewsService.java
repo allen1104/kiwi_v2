@@ -1,4 +1,4 @@
-package com.kiwi.cn.backend.service;
+package com.kiwi.cn.backend.service.api;
 
 import com.kiwi.cn.backend.vo.NewsVO;
 import org.springframework.data.domain.Page;

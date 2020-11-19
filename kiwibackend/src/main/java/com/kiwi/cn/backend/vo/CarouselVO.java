@@ -11,15 +11,15 @@ import java.util.Date;
  * @author aa
  */
 @Entity
-@Table(name = "kiwi_news_t")
+@Table(name = "kiwi_carousel_t")
 @Getter
 @Setter
-public class NewsVO extends BaseVO{
+public class CarouselVO extends BaseVO{
 
     @ApiModelProperty("主键")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer newsId;
+    private Integer carouselId;
 
     @ApiModelProperty("标题")
     @Column(name = "title", length = 200)
@@ -49,7 +49,7 @@ public class NewsVO extends BaseVO{
     @Override
     public String toString() {
         return "NewsVO{" +
-                "newsId=" + newsId +
+                "carouselId=" + carouselId +
                 ", title='" + title + '\'' +
                 ", titleUrl='" + titleUrl + '\'' +
                 ", description='" + description + '\'' +

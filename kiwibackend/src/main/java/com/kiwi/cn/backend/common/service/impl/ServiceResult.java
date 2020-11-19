@@ -1,6 +1,6 @@
 package com.kiwi.cn.backend.common.service.impl;
 
-import com.kiwi.cn.backend.common.service.CodeMessage;
+import com.kiwi.cn.backend.constant.KiwiCommenConstants;
 
 import java.io.Serializable;
 
@@ -34,7 +34,7 @@ public class ServiceResult<T, C> implements Serializable {
 
     public static <D> ServiceResult<D, String> success(D data) {
         ServiceResultBuilder<D, String> builder = builder();
-        return builder.status(1).data(data).message("success").build();
+        return builder.status(KiwiCommenConstants.SUCCESS).data(data).message("success").build();
     }
 
 
@@ -44,7 +44,7 @@ public class ServiceResult<T, C> implements Serializable {
 
     public static <D, C> ServiceResult<D, C> error(String msg, C errorCode) {
         ServiceResultBuilder<D, C> builder = builder();
-        return builder.status(0).message(msg).code(errorCode).build();
+        return builder.status(KiwiCommenConstants.FAIL).message(msg).code(errorCode).build();
     }
 
     static <D, C> ServiceResultBuilder<D, C> builder() {

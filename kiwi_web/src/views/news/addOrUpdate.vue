@@ -26,16 +26,20 @@
 <script>
 // 引入 wangEditor
 import wangEditor from "wangeditor";
+import newsApi from "@/api/news";
 
 export default {
   data() {
     return {
       form: {
-        id: null,
+        newsId: null,
         title: null,
         description: null,
         titleUrl: null,
-        content: null,
+        richContent: {
+          richContenId: null,
+          content: null,
+        }
       },
       editor: null,
       //   editorData: "",
@@ -46,7 +50,7 @@ export default {
 
     // 配置 onchange 回调函数，将数据同步到 vue 中
     editor.config.onchange = (newHtml) => {
-      this.form.content = newHtml;
+      this.form.richContent.content = newHtml;
     };
 
     // 创建编辑器
@@ -56,6 +60,7 @@ export default {
   },
   methods: {
     publish() {
+      newsApi.save(this.form);
       alert("提交成功");
     },
     goback() {
