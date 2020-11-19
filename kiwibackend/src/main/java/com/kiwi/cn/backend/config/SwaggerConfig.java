@@ -1,37 +1,82 @@
 package com.kiwi.cn.backend.config;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
+import springfox.documentation.builders.*;
+import springfox.documentation.oas.annotations.EnableOpenApi;
+import springfox.documentation.schema.ScalarType;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
-@EnableSwagger2
+@EnableOpenApi
 public class SwaggerConfig implements WebMvcConfigurer {
-    //api接口包扫描路径
-    public static final String SWAGGER_SCAN_BASE_PACKAGE = "com.kiwi.cn.backend.controller";
-    public static final String VERSION = "1.0.0";
     @Bean
     public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        //返回文档摘要信息
+        return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage(SWAGGER_SCAN_BASE_PACKAGE))
-                .paths(PathSelectors.any()) // 可以根据url路径设置哪些请求加入文档，忽略哪些请求
+                //.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .apis(RequestHandlerSelectors.withMethodAnnotation(Operation.class))
+                .paths(PathSelectors.any())
                 .build();
+//                .globalRequestParameters(getGlobalRequestParameters())
+//                .globalResponses(HttpMethod.GET, getGlobalResonseMessage())
+//                .globalResponses(HttpMethod.POST, getGlobalResonseMessage());
     }
+
+    //生成接口信息，包括标题、联系人等
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("单词计数服务") //设置文档的标题
-                .description("单词计数服务 API 接口文档") // 设置文档的描述
-                .version(VERSION) // 设置文档的版本信息-> 1.0.0 Version information
-                .termsOfServiceUrl("http://www.baidu.com") // 设置文档的License信息->1.3 License information
+                .title("Swagger3接口文档")
+                .description("如有疑问，请联系开发工程师Allen。")
+                .contact(new Contact("Allen", "http://www.baidu.com/", "allentc@163.com.com"))
+                .version("1.0")
                 .build();
     }
+
+//    //生成全局通用参数
+//    private List<RequestParameter> getGlobalRequestParameters() {
+//        List<RequestParameter> parameters = new ArrayList<>();
+//        parameters.add(new RequestParameterBuilder()
+//                .name("appid")
+//                .description("平台id")
+//                .required(true)
+//                .in(ParameterType.QUERY)
+//                .query(q -> q.model(m -> m.scalarModel(ScalarType.STRING)))
+//                .required(false)
+//                .build());
+//        parameters.add(new RequestParameterBuilder()
+//                .name("udid")
+//                .description("设备的唯一id")
+//                .required(true)
+//                .in(ParameterType.QUERY)
+//                .query(q -> q.model(m -> m.scalarModel(ScalarType.STRING)))
+//                .required(false)
+//                .build());
+//        parameters.add(new RequestParameterBuilder()
+//                .name("version")
+//                .description("客户端的版本号")
+//                .required(true)
+//                .in(ParameterType.QUERY)
+//                .query(q -> q.model(m -> m.scalarModel(ScalarType.STRING)))
+//                .required(false)
+//                .build());
+//        return parameters;
+//    }
+//
+//    //生成通用响应信息
+//    private List<Response> getGlobalResonseMessage() {
+//        List<Response> responseList = new ArrayList<>();
+//        responseList.add(new ResponseBuilder().code("404").description("找不到资源").build());
+//        return responseList;
+//    }
 }

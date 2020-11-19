@@ -12,14 +12,15 @@ import javax.persistence.*;
 public class RichContentVO extends BaseVO{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
-    @Column(name = "content", length = 65554)
+    private Integer richContentId;
+
+    @Column(name = "content", length = 65536)
     private String content;
 
     @Override
     public String toString() {
         return "RichContentVO{" +
-                "Id=" + Id +
+                "Id=" + richContentId +
                 ", content='" + content + '\'' +
                 '}' + super.toString();
     }
