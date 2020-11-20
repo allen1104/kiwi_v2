@@ -1,15 +1,31 @@
 <template>
-    <div>
-        详细内容
-        <button @click="back">返回</button>
-    </div>
+  <div>
+    <div v-html="editorData"></div>
+    <button @click="back">返回</button>
+  </div>
 </template>
 <script>
+import newApi from "@/api/news";
 export default {
-    methods: {
-        back(){
-            this.$router.go(-1);
-        }
+  data() {
+    return {
+      editorData: null,
+    };
+  },
+  created() {
+    // alert(this.$route.params.id);
+    this.getNewsById(this.$route.params.id);
+  },
+  methods: {
+    back() {
+      this.$router.go(-1);
     },
-}
+    getNewsById(id) {
+      newApi.findNewsById(id).then((response) => {
+        console.log(response.data);
+        this.editorData = response.data.data.richContent.content;
+      });
+    },
+  },
+};
 </script>

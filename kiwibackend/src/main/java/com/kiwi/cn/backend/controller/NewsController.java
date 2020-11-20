@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -27,7 +28,7 @@ public class NewsController {
     @Operation(summary = "分页查询")
     @PostMapping(path = "findPageList")
     public ServiceResult<Page<NewsVO>, String> findPageList() {
-        Pageable pageable = PageRequest.of(0, 10);
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("newsId").descending());
         return ServiceResult.success(service.findPageList(pageable));
     }
 
@@ -35,6 +36,7 @@ public class NewsController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "新闻主键id", required = true, dataType = "Integer"),
     })
+
     @GetMapping(path = "/{id}")
     public ServiceResult<Optional<NewsVO>, String> findById(@PathVariable Integer id) {
         return ServiceResult.success(service.findById(id));
@@ -58,8 +60,9 @@ public class NewsController {
 
     @Operation(summary = "首页展示查询")
     @GetMapping("/index")
-    public ServiceResult getIndex(@PathVariable Integer id) {
-        Pageable pageable = PageRequest.of(0, KiwiCommenConstants.SUCCESS);
-        return ServiceResult.success(service.findPageList(pageable));
+    public ServiceResult getIndex() {
+        Pageable pageable = PageRequest.of(0, KiwiCommenConstants.INDEX_SHOW_COUNT, Sort.by("newsId").descending());
+        Page<NewsVO> newsPage = service.findPageList(pageable);
+        return ServiceResult.success(newsPage.getContent());
     }
 }

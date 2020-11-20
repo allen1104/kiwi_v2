@@ -58,7 +58,7 @@ public class CarouselController {
 
     @Operation(summary = "首页展示查询，展示数量：")
     @GetMapping("/index")
-    public ServiceResult getIndex(@PathVariable Integer id) {
+    public ServiceResult getIndex() {
         Pageable pageable = PageRequest.of(0, KiwiCommenConstants.INDEX_SHOW_COUNT);
         return ServiceResult.success(service.findPageList(pageable));
     }

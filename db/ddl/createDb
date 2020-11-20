@@ -1,4 +1,4 @@
-CREATE DATABASE KIWI_DB;
+CREATE DATABASE KIWI_DB CHARACTER SET utf8 COLLATE utf8_general_ci;
 create user 'kiwi'@'%' identified by 'kiwi1234';
 CREATE USER 'kiwi'@'localhost' IDENTIFIED BY 'kiwi1234';
 CREATE USER 'kiwi'@'127.0.0.1' IDENTIFIED BY 'kiwi1234';

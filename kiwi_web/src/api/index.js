@@ -4,14 +4,14 @@ export default {
     getNewsIndex() {
         const req = request({
             method: 'get',
-            url: '/news/Index'
+            url: '/news/index'
         })
         return req;
     },
     getCarouselIndex() {
         const req = request({
             method: 'get',
-            url: '/carousel/Index'
+            url: '/carousel/index'
         })
         return req;
     }

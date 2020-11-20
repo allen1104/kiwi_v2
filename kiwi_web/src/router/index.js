@@ -44,6 +44,12 @@ const routes = [
         meta: { title: 'newsAdd' }
       },
       {
+        path: 'newsList/update',
+        name: 'newsUpdate',
+        component: NewsAddOrUpdate,
+        meta: { title: 'newsUpdate' }
+      },
+      {
         path: 'carouselList',
         component: CarouselList,
         meta: { title: 'carouselList' }

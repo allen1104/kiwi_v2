@@ -29,14 +29,24 @@
       </el-form-item>
     </el-form>
     <el-table :data="list" style="width: 100%">
-      <el-table-column type="index" prop="index" label="序号"> </el-table-column>
+      <el-table-column type="index" prop="index" label="序号">
+      </el-table-column>
       <el-table-column prop="title" label="标题"> </el-table-column>
       <el-table-column prop="description" label="描述"> </el-table-column>
-      <el-table-column prop="status" label="状态"> </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column prop="bizType" label="业务类型" width="80">
+      </el-table-column>
+      <el-table-column prop="isCarousel" label="滚动" width="50">
+      </el-table-column>
+      <el-table-column prop="status" label="状态" width="50"> </el-table-column>
+      <el-table-column label="操作" width="150">
         <template slot-scope="scope">
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)" >删除</el-button>
+          <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.row)"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -56,6 +66,7 @@
 </template>
 
 <script>
+import newsApi from "@/api/news";
 export default {
   data() {
     return {
@@ -74,15 +85,36 @@ export default {
     };
   },
 
-  created() {},
+  created() {
+    this.fetchData();
+  },
 
   methods: {
-    fetchData() {},
+    fetchData() {
+      newsApi.findPageList().then((response) => {
+        console.info(response.data);
+        this.currentPage = response.data.data.number;
+        this.total = response.data.data.totalElements;
+        this.list = response.data.data.content;
+      });
+    },
     handleAdd() {
       this.$router.push("/admin/newsList/add");
     },
-    handleEdit() {},
-    handleDelete() {},
+    handleEdit(row) {
+      console.info(row.newsId);
+      this.$router.push({
+        name: "newsUpdate",
+        params: {
+          id: row.newsId,
+        },
+      });
+    },
+    handleDelete(row) {
+      newsApi.deleteNewsById(row.newsId).then((response) => {
+        this.fetchData();
+      })
+    },
     handleSizeChange() {},
     handleCurrentChange() {},
   },

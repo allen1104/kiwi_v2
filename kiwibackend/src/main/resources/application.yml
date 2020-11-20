@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/kiwi_db?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/kiwi_db?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
     type: com.alibaba.druid.pool.DruidDataSource
     username: kiwi
     password: kiwi1234

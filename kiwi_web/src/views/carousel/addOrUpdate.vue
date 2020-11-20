@@ -72,7 +72,7 @@ export default {
 <style lang="scss">
 .home {
   padding: 20px;
-  width: 1200px;
+  // width: 1200px;
   margin: auto;
   position: relative;
   .btn {
