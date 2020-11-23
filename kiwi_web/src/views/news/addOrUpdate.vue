@@ -148,14 +148,22 @@ export default {
       this.form.status = 1;
       newsApi.save(this.form);
       alert("提交成功");
+      this.$router.go(-1);
     },
     goback() {
       this.$router.go(-1);
     },
     save() {
+      newsApi.save(this.form);
       alert("保存成功");
+      this.$router.go(-1);
     },
-    cancelPublish() {},
+    cancelPublish() {
+      this.form.status = 0;
+      newsApi.save(this.form);
+      alert("保存成功");
+      this.$router.go(-1);
+    },
     findNewsById(id) {
       newsApi.findNewsById(id).then((response) => {
         console.info(response.data);
