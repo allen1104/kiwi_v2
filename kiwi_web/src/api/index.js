@@ -14,5 +14,12 @@ export default {
             url: '/carousel/index'
         })
         return req;
-    }
+    },
+    getCarousel() {
+        const req = request({
+            method: 'get',
+            url: '/news/getCarousel'
+        })
+        return req;
+    },
 }

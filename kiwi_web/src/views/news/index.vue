@@ -35,16 +35,13 @@
       <el-table-column prop="description" label="描述"> </el-table-column>
       <el-table-column prop="bizType" label="业务类型" width="80">
       </el-table-column>
-      <el-table-column prop="isCarousel" label="滚动" width="50">
+      <el-table-column prop="isCarousel" label="轮播" width="50">
       </el-table-column>
       <el-table-column prop="status" label="状态" width="50"> </el-table-column>
       <el-table-column label="操作" width="150">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.row)"
+          <el-button size="mini" type="danger" @click="handleDelete(scope.row)"
             >删除</el-button
           >
         </template>
@@ -72,7 +69,7 @@ export default {
     return {
       list: [],
       pageSize: 10,
-      currentPage: 1,
+      currentPage: 0,
       total: 0,
       searchMap: {
         name: "",
@@ -91,7 +88,9 @@ export default {
 
   methods: {
     fetchData() {
-      newsApi.findPageList().then((response) => {
+      let page = this.currentPage;
+      let size = this.pageSize;
+      newsApi.findPageList(page, size).then((response) => {
         console.info(response.data);
         this.currentPage = response.data.data.number;
         this.total = response.data.data.totalElements;
@@ -113,10 +112,19 @@ export default {
     handleDelete(row) {
       newsApi.deleteNewsById(row.newsId).then((response) => {
         this.fetchData();
-      })
+      });
     },
-    handleSizeChange() {},
-    handleCurrentChange() {},
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+      this.pageSize = val;
+      this.currentPage = 0;
+      this.fetchData()
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.currentPage = val-1;
+      this.fetchData()
+    },
   },
 };
 </script>

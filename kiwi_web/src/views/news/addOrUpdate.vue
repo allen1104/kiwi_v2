@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" v-loading="loading">
     <el-form
       :inline="true"
       :model="form"
@@ -88,6 +88,7 @@ export default {
         bizType: "1",
         pubdate: new Date(),
         isCarousel: false,
+        status: 0,
         richContent: {
           richContenId: null,
           content: null,
@@ -116,6 +117,7 @@ export default {
           label: "暂时不要选",
         },
       ],
+      loading: true,
       //   editorData: "",
     };
   },
@@ -124,6 +126,8 @@ export default {
     if (id) {
       console.info(id);
       this.findNewsById(id);
+    }else{
+      this.loading = false;
     }
   },
   mounted() {
@@ -133,7 +137,7 @@ export default {
     editor.config.onchange = (newHtml) => {
       this.form.richContent.content = newHtml;
     };
-    editor.config.zIndex = 2000;
+    editor.config.zIndex = 1000;
     // 创建编辑器
     editor.create();
 
@@ -141,6 +145,7 @@ export default {
   },
   methods: {
     publish() {
+      this.form.status = 1;
       newsApi.save(this.form);
       alert("提交成功");
     },
@@ -156,6 +161,7 @@ export default {
         console.info(response.data);
         this.form = response.data.data;
         this.editor.txt.html(response.data.data.richContent.content);
+        this.loading = false;
       });
     },
   },

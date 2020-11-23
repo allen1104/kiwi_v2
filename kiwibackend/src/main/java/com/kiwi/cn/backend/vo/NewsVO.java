@@ -54,6 +54,7 @@ public class NewsVO extends BaseVO{
     @JoinColumn(name = "rich_content_id")
     private RichContentVO richContent;
 
+
     @Override
     public String toString() {
         return "NewsVO{" +

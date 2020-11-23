@@ -4,6 +4,7 @@ package com.kiwi.cn.backend.vo;
  * @author aa
  */
 public class BaseVO {
+
     private Integer createdBy;
     private Integer createdDate;
     private Integer lastUpdatedBy;

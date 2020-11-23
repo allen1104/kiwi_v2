@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,5 +35,10 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public void deleteById(Integer id) {
         dao.deleteById(id);
+    }
+
+    @Override
+    public List<NewsVO> findCarousel() {
+        return dao.findCarousel(NewsDao.TRUE, NewsDao.ONE);
     }
 }

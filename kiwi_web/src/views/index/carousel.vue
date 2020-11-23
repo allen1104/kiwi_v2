@@ -2,18 +2,35 @@
   <div class="block">
     <span class="demonstration">主圖</span>
     <el-carousel height="250px" type="card">
-      <el-carousel-item v-for="item in 4" :key="item">
+      <el-carousel-item v-for="item in list" :key="item">
         <!-- <h3 class="small">{{ item }}</h3> -->
-        <router-link to="/newsDetail">
-        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604330537979&di=68261073960a95ce16a67b33ca88e6bd&imgtype=0&src=http%3A%2F%2F00imgmini.eastday.com%2Fmobile%2F20181019%2F20181019070107_d41d8cd98f00b204e9800998ecf8427e_4.jpeg" class="image">
-        </router-link>
+        <!-- <router-link to="/newsDetail"> -->
+        <!-- </router-link> -->
+        <img :src="item.titleUrl" class="image" />
       </el-carousel-item>
     </el-carousel>
     
   </div>
 </template>
 <script>
-export default {};
+import newsApi from '@/api/index'
+export default {
+  data() {
+    return {
+      list: []
+    }
+  },
+  created() {
+    this.getCarousel();
+  },
+  methods: {
+    getCarousel(){
+      newsApi.getCarousel().then((reponse) =>{
+        this.list = reponse.data.data;
+      })
+    }
+  },
+};
 </script>
 
 <style>

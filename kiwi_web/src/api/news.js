@@ -5,29 +5,28 @@ export default {
         const req = request({
             method: 'post',
             url: '/news/save',
-            data:news
+            data: news
         })
         return req;
     },
-    findPageList(page) {
+    findPageList(page, size) {
         const req = request({
             method: 'post',
-            url: '/news/findPageList',
-            data:page
+            url: '/news/findPageList/' + size + '/' + page
         })
         return req;
     },
     findNewsById(id) {
         const req = request({
             method: 'get',
-            url: '/news/'+id
+            url: '/news/' + id
         })
         return req;
     },
     deleteNewsById(id) {
         const req = request({
             method: 'delete',
-            url: '/news/'+id
+            url: '/news/' + id
         })
         return req;
     },
