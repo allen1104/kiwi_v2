@@ -4,14 +4,14 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     username: kiwi
     password: kiwi1234
-    driver-class-name: com.mysql.cj.jdbc.Driver # 驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 20
       minimum-idle: 5
   jpa:
     hibernate:
-      ddl-auto: update # 自动更新
-    show-sql: true  # 日志中显示sql语句
+      ddl-auto: update
+    show-sql: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 server:

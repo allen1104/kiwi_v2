@@ -39,6 +39,11 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public List<NewsVO> findCarousel() {
-        return dao.findCarousel(NewsDao.TRUE, NewsDao.ONE);
+        return dao.findCarousel();
+    }
+
+    @Override
+    public Page<NewsVO> findNews(Pageable pageable) {
+        return dao.findNews(pageable);
     }
 }

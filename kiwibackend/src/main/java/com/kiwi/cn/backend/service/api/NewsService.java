@@ -17,4 +17,6 @@ public interface NewsService {
     void deleteById(Integer id);
 
     List<NewsVO> findCarousel();
+
+    Page<NewsVO> findNews(Pageable pageable);
 }

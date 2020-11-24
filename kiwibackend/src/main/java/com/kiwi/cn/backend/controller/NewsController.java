@@ -66,7 +66,7 @@ public class NewsController {
     @GetMapping("/index")
     public ServiceResult getIndex() {
         Pageable pageable = PageRequest.of(0, KiwiCommenConstants.INDEX_SHOW_COUNT, Sort.by("newsId").descending());
-        Page<NewsVO> newsPage = service.findPageList(pageable);
+        Page<NewsVO> newsPage = service.findNews(pageable);
         return ServiceResult.success(newsPage.getContent());
     }
 

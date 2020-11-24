@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <a href="#/">
-            <img class="logo" src="@/assets/logo.png" width="25px">
+            <img class="logo" src="@/assets/logo.png" width="50px">
             <span class="company">全国猕猴桃联盟管理系统</span>
         </a>
         

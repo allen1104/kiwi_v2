@@ -28,17 +28,17 @@
         <el-button @click="$refs['searchForm'].resetFields()">重置</el-button>
       </el-form-item>
     </el-form>
-    <el-table :data="list" style="width: 100%">
-      <el-table-column type="index" prop="index" label="序号">
+    <el-table :data="list" style="width: 100%" max-height="350" fixed stripe v-loading="loading">
+      <el-table-column type="index" prop="index" label="序号" @click="gotoDetail(scope.row)">
       </el-table-column>
       <el-table-column prop="title" label="标题"> </el-table-column>
       <el-table-column prop="description" label="描述"> </el-table-column>
-      <el-table-column prop="bizType" label="业务类型" width="80">
+      <el-table-column prop="bizType" label="业务类型" width="80" :formatter="formatterBizType">
       </el-table-column>
-      <el-table-column prop="isCarousel" label="轮播" width="50">
+      <el-table-column prop="isCarousel" label="轮播" width="50" :formatter="formatterIsCarousel">
       </el-table-column>
-      <el-table-column prop="status" label="状态" width="50"> </el-table-column>
-      <el-table-column label="操作" width="150">
+      <el-table-column prop="status" label="状态" width="70" :formatter="formatterStatus"> </el-table-column>
+      <el-table-column label="操作" width="150" fixed="right">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
           <el-button size="mini" type="danger" @click="handleDelete(scope.row)"
@@ -69,7 +69,7 @@ export default {
     return {
       list: [],
       pageSize: 10,
-      currentPage: 0,
+      currentPage: 1,
       total: 0,
       searchMap: {
         name: "",
@@ -79,6 +79,7 @@ export default {
         name: [{ required: true, message: "标题不能为空", trigger: "blur" }],
         code: [{ required: true, message: "详情不能为空", trigger: "blur" }],
       },
+      loading:true
     };
   },
 
@@ -88,13 +89,15 @@ export default {
 
   methods: {
     fetchData() {
-      let page = this.currentPage;
+      let page = this.currentPage-1;
       let size = this.pageSize;
+      this.loading = true;
       newsApi.findPageList(page, size).then((response) => {
         console.info(response.data);
-        this.currentPage = response.data.data.number;
+        this.currentPage = response.data.data.number+1;
         this.total = response.data.data.totalElements;
         this.list = response.data.data.content;
+        this.loading = false;
       });
     },
     handleAdd() {
@@ -115,16 +118,44 @@ export default {
       });
     },
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
       this.pageSize = val;
       this.currentPage = 0;
       this.fetchData()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-      this.currentPage = val-1;
+      this.currentPage = val;
       this.fetchData()
     },
+    formatterIsCarousel(row, column, cellValue, index) {
+      if(cellValue){
+        return '是'
+      }else{
+        return '否'
+      }
+    },
+    formatterBizType(row, column, cellValue, index) {
+      switch (cellValue) {
+        case '1': return '新闻';
+        case '2': return '没想好';
+        default: return '-';
+      }
+    },
+    formatterStatus(row, column, cellValue, index) {
+      switch (cellValue) {
+        case '0': return '草稿';
+        case '1': return '已发布';
+        case '2': return '取消发布';
+        default: return '-';
+      }
+    },
+    gotoDetail(row){
+      this.$router.push({
+        name: "newsDetail",
+        params: {
+          id: row.newsId,
+        },
+      });
+    }
   },
 };
 </script>

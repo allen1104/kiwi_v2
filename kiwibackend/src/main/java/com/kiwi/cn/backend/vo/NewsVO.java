@@ -54,6 +54,19 @@ public class NewsVO extends BaseVO{
     @JoinColumn(name = "rich_content_id")
     private RichContentVO richContent;
 
+    public NewsVO(){}
+
+    public NewsVO(Integer newsId, String title, String titleUrl, String description, String status, Date pubdate, String bizType, Boolean isCarousel) {
+        this.newsId = newsId;
+        this.title = title;
+        this.titleUrl = titleUrl;
+        this.description = description;
+        this.status = status;
+        this.pubdate = pubdate;
+        this.bizType = bizType;
+        this.isCarousel = isCarousel;
+    }
+
 
     @Override
     public String toString() {
