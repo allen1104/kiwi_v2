@@ -138,6 +138,7 @@ export default {
       this.form.richContent.content = newHtml;
     };
     editor.config.zIndex = 1000;
+    editor.config.linkImgCheck = function(imgSrc) { return true } // 无需校验
     // 创建编辑器
     editor.create();
 
@@ -146,23 +147,60 @@ export default {
   methods: {
     publish() {
       this.form.status = 1;
-      newsApi.save(this.form);
-      alert("提交成功");
-      this.$router.go(-1);
+      newsApi.save(this.form).then((response) => {
+        if(response.data.status ===1){
+          this.$message({
+                message: '发布成功',
+                type: 'success'
+              });
+          this.$router.go(-1);
+        }else{
+          let message = response.data.message
+          this.$message({
+                message: '发布失败：' + message,
+                type: 'fail'
+              });
+        }
+      });
+      
     },
     goback() {
       this.$router.go(-1);
     },
     save() {
-      newsApi.save(this.form);
-      alert("保存成功");
-      this.$router.go(-1);
+      newsApi.save(this.form).then((response) => {
+        if(response.data.status ===1){
+          this.$message({
+                message: '保存成功',
+                type: 'success'
+              });
+              this.form = response.data.data;
+        }else{
+          let message = response.data.message
+          this.$message({
+                message: '保存失败：' + message,
+                type: 'fail'
+              });
+        }
+      });
     },
     cancelPublish() {
       this.form.status = 0;
-      newsApi.save(this.form);
-      alert("保存成功");
-      this.$router.go(-1);
+      newsApi.save(this.form).then((response) => {
+        if(response.data.status ===1){
+          this.$message({
+                message: '取消发布成功',
+                type: 'success'
+              });
+              this.form = response.data.data;
+        }else{
+          let message = response.data.message
+          this.$message({
+                message: '取消发布失败：' + message,
+                type: 'fail'
+              });
+        }
+      });
     },
     findNewsById(id) {
       newsApi.findNewsById(id).then((response) => {

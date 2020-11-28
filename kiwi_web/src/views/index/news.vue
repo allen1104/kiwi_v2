@@ -8,7 +8,7 @@
           <div style="padding: 14px">
             <span>{{ item.title }}</span>
             <div class="bottom clearfix">
-              <time class="time">{{ new Date(item.pubdate) }}</time>
+              <!-- <time class="time">{{ new Date(item.pubdate) }}</time> -->
               <el-button
                 type="text"
                 @click="goDetail(item.newsId)"

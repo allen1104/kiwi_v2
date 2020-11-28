@@ -1,7 +1,7 @@
 <template>
   <div class="block">
     <span class="demonstration">主圖</span>
-    <el-carousel height="250px" type="card">
+    <el-carousel height="180px" >
       <el-carousel-item v-for="item in list" :key="item">
         <!-- <h3 class="small">{{ item }}</h3> -->
         <!-- <router-link to="/newsDetail"> -->

@@ -1,0 +1,13 @@
+CREATE DATABASE kiwi_db CHARACTER SET utf8 COLLATE utf8_general_ci;
+create user 'kiwi'@'%' identified by 'kiwi1234';
+CREATE USER 'kiwi'@'localhost' IDENTIFIED BY 'kiwi1234';
+CREATE USER 'kiwi'@'127.0.0.1' IDENTIFIED BY 'kiwi1234';
+CREATE USER 'kiwi'@'::1' IDENTIFIED BY 'kiwi1234';
+grant all privileges on kiwi_db.* to 'kiwi'@'%' identified by 'kiwi1234';
+grant all privileges on kiwi_db.* to 'kiwi'@'localhost' identified by 'kiwi1234';
+grant all privileges on kiwi_db.* to 'kiwi'@'127.0.0.1' identified by 'kiwi1234';
+grant all privileges on kiwi_db.* to 'kiwi'@'::1' identified by 'kiwi1234';
+flush privileges;
+
+UPDATE user SET Password=PASSWORD('kiwi1234') where USER='kiwi';
+FLUSH PRIVILEGES;

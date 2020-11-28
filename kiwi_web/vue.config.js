@@ -39,5 +39,5 @@ module.exports = {
         }
     },
     lintOnSave: false,
-    productionSourceMap: false
+    productionSourceMap: true
 }

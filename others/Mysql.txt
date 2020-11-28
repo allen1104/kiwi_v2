@@ -1,0 +1,2 @@
+centos 安装mysql
+https://blog.csdn.net/pengjunlee/article/details/81212250
