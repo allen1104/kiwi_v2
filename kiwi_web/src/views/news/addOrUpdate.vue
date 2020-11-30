@@ -91,33 +91,33 @@ export default {
         status: 0,
         richContent: {
           richContenId: null,
-          content: null,
-        },
+          content: null
+        }
       },
       editor: null,
       options: [
         {
           value: "1",
-          label: "新闻",
+          label: "新闻"
         },
         {
           value: "2",
-          label: "还没想好",
+          label: "还没想好"
         },
         {
           value: "3",
-          label: "暂时不要选",
+          label: "暂时不要选"
         },
         {
           value: "4",
-          label: "暂时不要选",
+          label: "暂时不要选"
         },
         {
           value: "5",
-          label: "暂时不要选",
-        },
+          label: "暂时不要选"
+        }
       ],
-      loading: true,
+      loading: true
       //   editorData: "",
     };
   },
@@ -126,7 +126,7 @@ export default {
     if (id) {
       console.info(id);
       this.findNewsById(id);
-    }else{
+    } else {
       this.loading = false;
     }
   },
@@ -134,11 +134,14 @@ export default {
     const editor = new wangEditor(`#contentDiv`);
 
     // 配置 onchange 回调函数，将数据同步到 vue 中
-    editor.config.onchange = (newHtml) => {
+    editor.config.onchange = newHtml => {
       this.form.richContent.content = newHtml;
     };
     editor.config.zIndex = 1000;
-    editor.config.linkImgCheck = function(imgSrc) { return true } // 无需校验
+    editor.config.linkImgCheck = function(imgSrc) {
+      console.log(imgSrc);
+      return true;
+    }; // 无需校验
     // 创建编辑器
     editor.create();
 
@@ -147,70 +150,69 @@ export default {
   methods: {
     publish() {
       this.form.status = 1;
-      newsApi.save(this.form).then((response) => {
-        if(response.data.status ===1){
+      newsApi.save(this.form).then(response => {
+        if (response.data.status === 1) {
           this.$message({
-                message: '发布成功',
-                type: 'success'
-              });
+            message: "发布成功",
+            type: "success"
+          });
           this.$router.go(-1);
-        }else{
-          let message = response.data.message
+        } else {
+          let message = response.data.message;
           this.$message({
-                message: '发布失败：' + message,
-                type: 'fail'
-              });
+            message: "发布失败：" + message,
+            type: "fail"
+          });
         }
       });
-      
     },
     goback() {
       this.$router.go(-1);
     },
     save() {
-      newsApi.save(this.form).then((response) => {
-        if(response.data.status ===1){
+      newsApi.save(this.form).then(response => {
+        if (response.data.status === 1) {
           this.$message({
-                message: '保存成功',
-                type: 'success'
-              });
-              this.form = response.data.data;
-        }else{
-          let message = response.data.message
+            message: "保存成功",
+            type: "success"
+          });
+          this.form = response.data.data;
+        } else {
+          let message = response.data.message;
           this.$message({
-                message: '保存失败：' + message,
-                type: 'fail'
-              });
+            message: "保存失败：" + message,
+            type: "fail"
+          });
         }
       });
     },
     cancelPublish() {
       this.form.status = 0;
-      newsApi.save(this.form).then((response) => {
-        if(response.data.status ===1){
+      newsApi.save(this.form).then(response => {
+        if (response.data.status === 1) {
           this.$message({
-                message: '取消发布成功',
-                type: 'success'
-              });
-              this.form = response.data.data;
-        }else{
-          let message = response.data.message
+            message: "取消发布成功",
+            type: "success"
+          });
+          this.form = response.data.data;
+        } else {
+          let message = response.data.message;
           this.$message({
-                message: '取消发布失败：' + message,
-                type: 'fail'
-              });
+            message: "取消发布失败：" + message,
+            type: "fail"
+          });
         }
       });
     },
     findNewsById(id) {
-      newsApi.findNewsById(id).then((response) => {
+      newsApi.findNewsById(id).then(response => {
         console.info(response.data);
         this.form = response.data.data;
         this.editor.txt.html(response.data.data.richContent.content);
         this.loading = false;
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

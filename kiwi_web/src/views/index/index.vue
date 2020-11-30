@@ -1,12 +1,12 @@
 <template>
   <el-container style="border: 1px solid #eee; background-color:#f9fbe4;">
     <el-container>
-         <el-header>
-           <Header/>
-        </el-header>
+      <el-header>
+        <Header />
+      </el-header>
       <el-main>
-        <Carousel/>
-        <News/>
+        <Carousel />
+        <News />
       </el-main>
     </el-container>
   </el-container>

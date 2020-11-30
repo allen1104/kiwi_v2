@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <!--  default-active :　默认选中的菜单
+    <!--  default-active : 默认选中的菜单
             :router="true" true表示开启路由模式,开启之后, index值代表的就是路由地址
           -->
     <el-menu
@@ -26,7 +26,6 @@
     </el-menu>
   </div>
 </template>
-
 
 <style scoped>
 .el-menu {

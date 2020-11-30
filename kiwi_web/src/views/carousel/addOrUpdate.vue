@@ -36,9 +36,9 @@ export default {
         id: null,
         title: null,
         description: null,
-        content: null,
+        content: null
       },
-      editor: null,
+      editor: null
       //   editorData: "",
     };
   },
@@ -46,7 +46,7 @@ export default {
     const editor = new wangEditor(`#demo1`);
 
     // 配置 onchange 回调函数，将数据同步到 vue 中
-    editor.config.onchange = (newHtml) => {
+    editor.config.onchange = newHtml => {
       this.form.content = newHtml;
     };
 
@@ -64,8 +64,8 @@ export default {
     },
     save() {
       alert("保存成功");
-    },
-  },
+    }
+  }
 };
 </script>
 

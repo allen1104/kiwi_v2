@@ -73,12 +73,12 @@ export default {
       total: 0,
       searchMap: {
         name: "",
-        code: "",
+        code: ""
       },
       rules: {
         name: [{ required: true, message: "标题不能为空", trigger: "blur" }],
-        code: [{ required: true, message: "详情不能为空", trigger: "blur" }],
-      },
+        code: [{ required: true, message: "详情不能为空", trigger: "blur" }]
+      }
     };
   },
 
@@ -92,7 +92,7 @@ export default {
     handleEdit() {},
     handleDelete() {},
     handleSizeChange() {},
-    handleCurrentChange() {},
-  },
+    handleCurrentChange() {}
+  }
 };
 </script>

@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       newsList: [],
-      currentDate: new Date(),
+      currentDate: new Date()
     };
   },
   created() {
@@ -71,17 +71,17 @@ export default {
       this.$router.push({
         name: "newsDetail",
         params: {
-          id: id,
-        },
+          id: id
+        }
       });
     },
     getNewsIndex() {
-      indexApi.getNewsIndex().then((response) => {
+      indexApi.getNewsIndex().then(response => {
         console.log(response.data);
         this.newsList = response.data.data;
         // this.list = response.data;
       });
-    },
-  },
+    }
+  }
 };
 </script>
