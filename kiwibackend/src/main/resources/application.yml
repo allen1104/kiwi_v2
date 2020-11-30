@@ -11,12 +11,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 server:
   port: 8888
-  springfox:
-    documentation:
-      swagger-ui:
-        enabled:true
