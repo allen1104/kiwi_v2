@@ -196,11 +196,9 @@ export default {
       }
     },
     gotoDetail(row) {
+      let id = row.newsId;
       this.$router.push({
-        name: "newsDetail",
-        params: {
-          id: row.newsId,
-        },
+        path: "newsDetail/" + id
       });
     },
   },

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NewsDao extends JpaRepository<NewsVO, Integer> {
+public interface INewsDao extends JpaRepository<NewsVO, Integer> {
 
     @Query(value = "select new NewsVO(newsId, title, titleUrl, description, status, pubdate, bizType, isCarousel) from NewsVO t where t.isCarousel = 1 and t.status = 1 and t.bizType = 1")
     List<NewsVO> findCarousel();

@@ -2,7 +2,7 @@ package com.kiwi.cn.backend.controller;
 
 import com.kiwi.cn.backend.common.service.impl.ServiceResult;
 import com.kiwi.cn.backend.constant.KiwiCommenConstants;
-import com.kiwi.cn.backend.service.api.CarouselService;
+import com.kiwi.cn.backend.service.api.ICarouselService;
 import com.kiwi.cn.backend.vo.NewsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -22,7 +22,7 @@ import java.util.Optional;
 public class CarouselController {
 
     @Autowired
-    CarouselService service;
+    ICarouselService service;
 
     @Operation(summary = "分页查询")
     @PostMapping(path = "findPageList")

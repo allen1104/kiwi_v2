@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CarouselDao extends JpaRepository<NewsVO, Integer> {
+public interface ICarouselDao extends JpaRepository<NewsVO, Integer> {
 }

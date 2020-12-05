@@ -69,10 +69,7 @@ export default {
   methods: {
     goDetail(id) {
       this.$router.push({
-        name: "newsDetail",
-        params: {
-          id: id
-        }
+        path: "newsDetail/"+id,
       });
     },
     getNewsIndex() {

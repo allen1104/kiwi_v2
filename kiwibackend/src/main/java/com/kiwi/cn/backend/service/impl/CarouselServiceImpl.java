@@ -1,8 +1,7 @@
 package com.kiwi.cn.backend.service.impl;
 
-import com.kiwi.cn.backend.dao.CarouselDao;
-import com.kiwi.cn.backend.dao.NewsDao;
-import com.kiwi.cn.backend.service.api.CarouselService;
+import com.kiwi.cn.backend.dao.ICarouselDao;
+import com.kiwi.cn.backend.service.api.ICarouselService;
 import com.kiwi.cn.backend.vo.NewsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,10 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class CarouselServiceImpl implements CarouselService {
+public class CarouselServiceImpl implements ICarouselService {
 
     @Autowired
-    CarouselDao dao;
+    ICarouselDao dao;
 
     @Override
     public Page<NewsVO> findPageList(Pageable pageable) {

@@ -3,23 +3,30 @@ import VueRouter from "vue-router";
 import Index from "../views/index";
 import newsDetail from "../views/newsDetail";
 import Layout from "@/components/Layout.vue";
-import Home from "../views/home/index.vue";
-import CarouselList from "../views/carousel/index.vue";
+import Home from "../views/home/";
+import CarouselList from "../views/carousel/";
 import CarouselAddOrUpdate from "../views/carousel/addOrUpdate.vue";
-import NewsList from "../views/news/index.vue";
+import NewsList from "../views/news/";
 import NewsAddOrUpdate from "../views/news/addOrUpdate.vue";
+import Login from "../views/login/";
 Vue.use(VueRouter);
 
 const routes = [
   {
-    // 登录页
+       // 登录页
+       path: '/login',
+       name: 'login', //路由名称
+       component: Login
+ },
+  {
+    // 首頁
     path: "/",
     name: "index", //路由名称
     component: Index
   },
   {
-    // 登录页
-    path: "/newsDetail",
+    // 新聞詳情
+    path: "/newsDetail/:id",
     name: "newsDetail", //路由名称
     component: newsDetail
   },
