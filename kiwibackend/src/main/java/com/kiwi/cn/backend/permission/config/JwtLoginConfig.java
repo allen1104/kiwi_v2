@@ -8,11 +8,11 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 
-public class JwtLoginConfigurer<T extends JwtLoginConfigurer<T, B>, B extends HttpSecurityBuilder<B>> extends AbstractHttpConfigurer<T, B> {
+public class JwtLoginConfig<T extends JwtLoginConfig<T, B>, B extends HttpSecurityBuilder<B>> extends AbstractHttpConfigurer<T, B> {
 
     private JwtAuthenticationFilter authFilter;
 
-    public JwtLoginConfigurer() {
+    public JwtLoginConfig() {
         this.authFilter = new JwtAuthenticationFilter();
     }
 
@@ -25,12 +25,12 @@ public class JwtLoginConfigurer<T extends JwtLoginConfigurer<T, B>, B extends Ht
         http.addFilterBefore(filter, LogoutFilter.class);
     }
 
-    public JwtLoginConfigurer<T, B> permissiveRequestUrls(String ... urls){
+    public JwtLoginConfig<T, B> permissiveRequestUrls(String ... urls){
         authFilter.setPermissiveUrl(urls);
         return this;
     }
 
-    public JwtLoginConfigurer<T, B> tokenValidSuccessHandler(AuthenticationSuccessHandler successHandler){
+    public JwtLoginConfig<T, B> tokenValidSuccessHandler(AuthenticationSuccessHandler successHandler){
         authFilter.setAuthenticationSuccessHandler(successHandler);
         return this;
     }

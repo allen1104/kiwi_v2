@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author Supporting
+ */
 public class JsonLoginSuccessHandler implements AuthenticationSuccessHandler {
     private JwtUserServiceImpl jwtUserService;
 

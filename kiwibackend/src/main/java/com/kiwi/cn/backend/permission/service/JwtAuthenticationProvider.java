@@ -15,6 +15,9 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
+/**
+ * @author Supporting
+ */
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 
     private JwtUserServiceImpl userService;
@@ -34,7 +37,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         if (user == null || user.getPassword() == null) {
             throw new NonceExpiredException("Token expires");
         }
-        String encryptSalt = user.getPassword();
+        String encryptSalt = user.getUsername();
         try {
             Algorithm algorithm = Algorithm.HMAC256(encryptSalt);
             JWTVerifier verifier = JWT.require(algorithm)

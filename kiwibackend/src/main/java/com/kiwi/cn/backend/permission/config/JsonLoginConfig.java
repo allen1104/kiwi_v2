@@ -9,6 +9,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
 
+/**
+ * @author Supporting
+ */
 public class JsonLoginConfig<T extends JsonLoginConfig<T, B>, B extends HttpSecurityBuilder<B>> extends AbstractHttpConfigurer<T, B> {
 
     private KiwiUsernamePasswordAuthenticationFilter authFilter;
@@ -30,7 +33,12 @@ public class JsonLoginConfig<T extends JsonLoginConfig<T, B>, B extends HttpSecu
         //指定Filter的位置
         http.addFilterAfter(filter, LogoutFilter.class);
     }
-    //设置成功的Handler，这个handler定义成Bean，所以从外面set进来
+
+    /**
+     * 设置成功的Handler，这个handler定义成Bean，所以从外面set进来
+     * @param authSuccessHandler
+     * @return
+     */
     public JsonLoginConfig<T,B> loginSuccessHandler(AuthenticationSuccessHandler authSuccessHandler){
         authFilter.setAuthenticationSuccessHandler(authSuccessHandler);
         return this;

@@ -2,6 +2,7 @@ package com.kiwi.cn.backend.permission.filter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.FilterChain;
@@ -41,7 +42,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
     private AuthenticationFailureHandler failureHandler = new SimpleUrlAuthenticationFailureHandler();
 
     public JwtAuthenticationFilter() {
-        this.requiresAuthenticationRequestMatcher = new RequestHeaderRequestMatcher("Authorization");
+//        this.requiresAuthenticationRequestMatcher = new RequestHeaderRequestMatcher("Authorization");
+         this.requiresAuthenticationRequestMatcher = new AntPathRequestMatcher("/login");
     }
 
     @Override
@@ -59,7 +61,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        if (!requiresAuthentication(request, response)) {
+        if (permissiveRequest(request)) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -87,10 +89,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
         }
         if(authResult != null) {
             successfulAuthentication(request, response, filterChain, authResult);
-        } else if(!permissiveRequest(request)){
+        }else{
             unsuccessfulAuthentication(request, response, failed);
-            return;
         }
+//        } else if(!permissiveRequest(request)){
+
+//            return;
+//        }
 
         filterChain.doFilter(request, response);
     }
@@ -123,20 +128,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
     }
 
     protected boolean permissiveRequest(HttpServletRequest request) {
-        if(permissiveRequestMatchers == null)
+        if(permissiveRequestMatchers == null) {
             return false;
+        }
         for(RequestMatcher permissiveMatcher : permissiveRequestMatchers) {
-            if(permissiveMatcher.matches(request))
+            if(permissiveMatcher.matches(request)) {
                 return true;
+            }
         }
         return false;
     }
 
     public void setPermissiveUrl(String... urls) {
-        if(permissiveRequestMatchers == null)
+        if(permissiveRequestMatchers == null) {
             permissiveRequestMatchers = new ArrayList<>();
-        for(String url : urls)
-            permissiveRequestMatchers .add(new AntPathRequestMatcher(url));
+        }
+        Arrays.stream(urls).forEach(url -> permissiveRequestMatchers.add(new AntPathRequestMatcher(url)));
     }
 
     public void setAuthenticationSuccessHandler(

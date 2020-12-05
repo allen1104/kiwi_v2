@@ -14,8 +14,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+import org.springframework.security.web.header.Header;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -23,6 +26,9 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 
+/**
+ * @author Supporting
+ */
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
@@ -34,30 +40,38 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/news/config/**/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .csrf().disable()
-                .formLogin().disable()
-                .sessionManagement().disable()
-//                .cors()
+                .csrf().disable() //CRSF禁用，因为不使用session
+                .formLogin().disable() //禁用form登录
+                //禁用session 好像没有近用掉， cookie 还是可以认证
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .cors() //前端代理，不需要后端智齿跨域
 //                .and()
 //                .headers().addHeaderWriter(new StaticHeadersWriter(Arrays.asList(
 //                new Header("Access-control-Allow-Origin","*"),
 //                new Header("Access-Control-Expose-Headers","Authorization"))))
-//                .and()
+                .and()
+                //拦截OPTIONS请求，直接返回header
                 .addFilterAfter(new OptionsRequestFilter(), CorsFilter.class)
+                //添加登录filter
                 .apply(new JsonLoginConfig<>()).loginSuccessHandler(jsonLoginSuccessHandler())
                 .and()
-                .apply(new JwtLoginConfigurer<>()).tokenValidSuccessHandler(jwtRefreshSuccessHandler()).permissiveRequestUrls("/logout")
+                //添加token的filter
+                .apply(new JwtLoginConfig<>()).tokenValidSuccessHandler(jwtRefreshSuccessHandler()).permissiveRequestUrls("/logout","/login")
                 .and()
+                //使用默认的logoutFilter
                 .logout()
 //		        .logoutUrl("/logout")   //默认就是"/logout"
+                //logout时清除token
                 .addLogoutHandler(tokenClearLogoutHandler())
+                //logout成功后返回200
                 .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
                 .and()
                 .sessionManagement().disable();
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth){
         auth.authenticationProvider(daoAuthenticationProvider()).authenticationProvider(jwtAuthenticationProvider());
     }
 
@@ -73,7 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     @Bean("daoAuthenticationProvider")
-    protected AuthenticationProvider daoAuthenticationProvider() throws Exception{
+    protected AuthenticationProvider daoAuthenticationProvider(){
         //这里会默认使用BCryptPasswordEncoder比对加密后的密码，注意要跟createUser时保持一致
         DaoAuthenticationProvider daoProvider = new DaoAuthenticationProvider();
         daoProvider.setUserDetailsService(userDetailsService());
