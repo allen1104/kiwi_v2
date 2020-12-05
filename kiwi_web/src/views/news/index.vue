@@ -101,13 +101,13 @@ export default {
       total: 0,
       searchMap: {
         name: "",
-        code: "",
+        code: ""
       },
       rules: {
         name: [{ required: true, message: "标题不能为空", trigger: "blur" }],
-        code: [{ required: true, message: "详情不能为空", trigger: "blur" }],
+        code: [{ required: true, message: "详情不能为空", trigger: "blur" }]
       },
-      loading: true,
+      loading: true
     };
   },
 
@@ -120,7 +120,7 @@ export default {
       let page = this.currentPage - 1;
       let size = this.pageSize;
       this.loading = true;
-      newsApi.findPageList(page, size).then((response) => {
+      newsApi.findPageList(page, size).then(response => {
         console.info(response.data);
         this.currentPage = response.data.data.number + 1;
         this.total = response.data.data.totalElements;
@@ -136,16 +136,16 @@ export default {
       this.$router.push({
         name: "newsUpdate",
         params: {
-          id: row.newsId,
-        },
+          id: row.newsId
+        }
       });
     },
     handleDelete(row) {
-      newsApi.deleteNewsById(row.newsId).then((response) => {
+      newsApi.deleteNewsById(row.newsId).then(response => {
         if (response.data.data === 1) {
           this.$message({
             message: "删除成功",
-            type: "success",
+            type: "success"
           });
         } else {
           let message = response.data.message;
@@ -200,7 +200,7 @@ export default {
       this.$router.push({
         path: "newsDetail/" + id
       });
-    },
-  },
+    }
+  }
 };
 </script>

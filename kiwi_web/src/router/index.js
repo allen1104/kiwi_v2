@@ -13,11 +13,11 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-       // 登录页
-       path: '/login',
-       name: 'login', //路由名称
-       component: Login
- },
+    // 登录页
+    path: "/login",
+    name: "login", //路由名称
+    component: Login
+  },
   {
     // 首頁
     path: "/",

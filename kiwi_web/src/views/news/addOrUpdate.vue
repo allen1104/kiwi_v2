@@ -138,7 +138,7 @@ export default {
       this.form.richContent.content = newHtml;
     };
     editor.config.zIndex = 1000;
-    editor.config.uploadImgAccept = ['abc'];
+    editor.config.uploadImgAccept = ["abc"];
     editor.config.linkImgCheck = function(imgSrc) {
       console.log(imgSrc);
       return true;

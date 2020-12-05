@@ -5,14 +5,18 @@
       <span class="company">全国猕猴桃联盟后台管理</span>
     </a>
     <el-dropdown @command="handleCommand">
-            <span class="el-dropdown-link">
-                {{user.name}}<i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item icon="el-icon-edit" command="a">修改密码</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-s-fold" command="b">退出系统</el-dropdown-item>
-            </el-dropdown-menu>
-        </el-dropdown>
+      <span class="el-dropdown-link">
+        {{ user.name }}<i class="el-icon-arrow-down el-icon--right"></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item icon="el-icon-edit" command="a"
+          >修改密码</el-dropdown-item
+        >
+        <el-dropdown-item icon="el-icon-s-fold" command="b"
+          >退出系统</el-dropdown-item
+        >
+      </el-dropdown-menu>
+    </el-dropdown>
 
     <!-- <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link">
@@ -46,12 +50,11 @@
 </template>
 
 <script>
-import {logout} from '@/api/login'
+import { logout } from "@/api/login";
 // import passwordApi from '@/api/password'
 
 export default {
   data() {
-    
     // // 在return 上面进行申明自定校验
     // const validateOldPass = (rule, value, callback) => {
     //     // console.log(this.user.id)
@@ -81,7 +84,7 @@ export default {
     return {
       user: {
         name: "admin"
-      },
+      }
       // dialogFormVisible: false,
       // ruleForm: {
       //     oldPass: '',
@@ -105,42 +108,41 @@ export default {
   },
 
   methods: {
-       handleCommand(command) {
-            switch (command) {
-                case 'a':
-                    // 打开修改密码窗口
-                    this.handlePwd()
-                    break;
-                case 'b':
-                    // 退出系统
-                    this.handleLogout()
-                    break;
-                default:
-                    break;
-            }
-        },
+    handleCommand(command) {
+      switch (command) {
+        case "a":
+          // 打开修改密码窗口
+          this.handlePwd();
+          break;
+        case "b":
+          // 退出系统
+          this.handleLogout();
+          break;
+        default:
+          break;
+      }
+    },
 
-        // 退出系统
-        handleLogout() {
-            this.$store.dispatch('Logout').then(response => {
-              this.$router.push('/login');
-                // if(response.flag) {
-                //     // 退出成功
-                //     // 回到登录页面
-                //     this.$router.push('/login')
-                // }else {
-                //     this.$message({
-                //         message: resp.message,
-                //         type: 'warning',
-                //         duration: 500 // 弹出停留时间
-                //     });
-                // }
-            })
-            
-        },
-        handlePwd(){
-          alert("建設ing");
-        }
+    // 退出系统
+    handleLogout() {
+      this.$store.dispatch("Logout").then(response => {
+        this.$router.push("/login");
+        // if(response.flag) {
+        //     // 退出成功
+        //     // 回到登录页面
+        //     this.$router.push('/login')
+        // }else {
+        //     this.$message({
+        //         message: resp.message,
+        //         type: 'warning',
+        //         duration: 500 // 弹出停留时间
+        //     });
+        // }
+      });
+    },
+    handlePwd() {
+      alert("建設ing");
+    }
     // // 打开修改密码窗口
     // handlePwd(){
     //     this.dialogFormVisible = true

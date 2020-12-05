@@ -8,7 +8,7 @@ import store from "./store";
 
 Vue.use(ElementUI);
 // Vue.use(MintUI);
-import './permission'
+import "./permission";
 
 Vue.config.productionTip = process.env.NODE_ENV === "porduction";
 

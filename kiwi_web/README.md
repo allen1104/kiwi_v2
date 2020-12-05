@@ -1,4 +1,4 @@
-# vue-demo2
+# kiwi_web
 
 ## Project setup
 ```
