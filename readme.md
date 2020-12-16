@@ -30,10 +30,12 @@
 
 ###### 2、登陆
 
-###### 3、登陆校验拦截器---https://blog.csdn.net/rainyspring4540/article/details/88288839---https://wangsong.blog.csdn.net/article/details/105550122?utm_medium=distribute.pc_relevant.none-task-blog-searchFromBaidu-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-searchFromBaidu-2.control
+###### 3、登陆校验拦截器---https://juejin.cn/post/6844903974546456590
 
 ###### 4、全局loading---请求拦截器中打开加载效果, 响应拦截器和异常中关闭加载效果.
 
 ###### 5、全局异常处理---在 axios 响应拦截器中处理异常
 
 ###### 6、vuex权限
+
+###### 7、富文本切换到 tinymce 安装命令：npm i tinymce @packy-tang/vue-tinymce 
