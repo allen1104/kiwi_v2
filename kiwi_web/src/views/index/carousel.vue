@@ -1,8 +1,8 @@
 <template>
   <div class="block">
     <span class="demonstration">主圖</span>
-    <el-carousel height="180px">
-      <el-carousel-item v-for="item in list" :key="item">
+    <el-carousel :height="carouselHeight">
+      <el-carousel-item v-for="item in list" :key="item.newsId">
         <!-- <h3 class="small">{{ item }}</h3> -->
         <!-- <router-link to="/newsDetail"> -->
         <!-- </router-link> -->
@@ -16,19 +16,25 @@ import newsApi from "@/api/index";
 export default {
   data() {
     return {
-      list: []
+      list: [],
+      carouselHeight: "180px",
     };
   },
   created() {
     this.getCarousel();
+    if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+      this.carouselHeight = "180px";
+    } else {
+      this.carouselHeight = "600px";
+    }
   },
   methods: {
     getCarousel() {
-      newsApi.getCarousel().then(reponse => {
+      newsApi.getCarousel().then((reponse) => {
         this.list = reponse.data.data;
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .apply(new JsonLoginConfig<>()).loginSuccessHandler(jsonLoginSuccessHandler())
                 .and()
                 //添加token的filter
-                .apply(new JwtLoginConfig<>()).tokenValidSuccessHandler(jwtRefreshSuccessHandler()).permissiveRequestUrls("/logout","/login")
+                .apply(new JwtLoginConfig<>()).tokenValidSuccessHandler(jwtRefreshSuccessHandler()).permissiveRequestUrls("/logout","/login","/news/search/*")
                 .and()
                 //使用默认的logoutFilter
                 .logout()

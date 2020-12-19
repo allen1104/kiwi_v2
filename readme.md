@@ -39,3 +39,7 @@
 ###### 6、vuex权限
 
 ###### 7、富文本切换到 tinymce 安装命令：npm i tinymce @packy-tang/vue-tinymce 
+
+###### 8、前端重构参考https://github.com/PanJiaChen/vue-element-admin
+
+在github上搜索高星代码stars:>1000 language:vue
