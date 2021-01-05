@@ -12,6 +12,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    format_sql: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 #  security:
@@ -20,3 +21,20 @@ spring:
 #      password: admin1234
 server:
   port: 8888
+#kiwi
+kiwi:
+  qiniu:
+    accessKey: JVvJtVWZaxRo8-Sw-hDbVU3arggBDqK7n7YQ0s4R
+    secretKey: jK701C8jc5HdPMglL9Rbg9vag78OnDvV3WcJezC6
+    bucket: kiwialliance
+# log
+logging:
+  level:
+    org.springframework.security:
+      - debug
+      - info
+    org.springframework.web: error
+    org.hibernate.SQL: debug
+    org.hibernate.engine.QueryParameters: debug
+    org.hibernate.engine.query.HQLQueryPlan: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace

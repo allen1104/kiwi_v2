@@ -1,10 +1,10 @@
 import request from "@/utils/request";
 
 export default {
-  getNewsIndex() {
+  getNewsIndex(bizType) {
     const req = request({
       method: "get",
-      url: "/news/search/index"
+      url: `/news/search/index/${bizType}`
     });
     return req;
   },
@@ -21,5 +21,13 @@ export default {
       url: "/news/search/getCarousel"
     });
     return req;
-  }
+  },
+  findPageList(type,requestBody) {
+    const req = request({
+      method: "post",
+      url: `/news/search/findPageList/${type}`,
+      data: requestBody
+    });
+    return req;
+  },
 };

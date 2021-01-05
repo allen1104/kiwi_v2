@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface INewsService {
     Page<NewsVO> findPageList(Pageable pageable);
 
+    Page<NewsVO> findPageListByType(Pageable pageable,String type);
+
     Optional<NewsVO> findById(Integer id);
 
     NewsVO save(NewsVO newsVO);
@@ -18,5 +20,5 @@ public interface INewsService {
 
     List<NewsVO> findCarousel();
 
-    Page<NewsVO> findNews(Pageable pageable);
+    Page<NewsVO> findNews(Pageable pageable, String type);
 }

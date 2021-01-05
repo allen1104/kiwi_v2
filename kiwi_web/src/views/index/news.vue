@@ -1,12 +1,18 @@
 <template>
-  <div>
-    <div>联盟新闻</div>
+  <div style="margin-top: 1rem;">
+    <div class="headName">
+      <span>{{ title }}</span>
+      <el-button type="text" @click="more" class="button"
+        >更多</el-button
+      >
+    </div>
     <el-row>
+      <template v-if="newsList.length > 0">
       <el-col :span="8" v-for="item in newsList" :key="item.newsId">
         <el-card :body-style="{ padding: '0px' }">
           <img :src="item.titleUrl" class="image" />
-          <div style="padding: 14px">
-            <span>{{ item.title }}</span>
+          <div style="padding: 1rem">
+            <div style="height: 30px">{{ item.title | ellipsis }}</div>
             <div class="bottom clearfix">
               <!-- <time class="time">{{ new Date(item.pubdate) }}</time> -->
               <el-button
@@ -19,6 +25,10 @@
           </div>
         </el-card>
       </el-col>
+      </template>
+      <template v-else>
+        <div style="text-align: center;">------暂无内容------</div>
+      </template>
     </el-row>
   </div>
 </template>
@@ -57,10 +67,11 @@
 <script>
 import indexApi from "@/api/index";
 export default {
+  props: ["title", "bizType"],
   data() {
     return {
       newsList: [],
-      currentDate: new Date()
+      currentDate: new Date(),
     };
   },
   created() {
@@ -69,16 +80,36 @@ export default {
   methods: {
     goDetail(id) {
       this.$router.push({
-        path: "newsDetail/" + id
+        path: "newsDetail/" + id,
       });
     },
     getNewsIndex() {
-      indexApi.getNewsIndex().then(response => {
+      indexApi.getNewsIndex(this.bizType).then((response) => {
         console.log(response.data);
         this.newsList = response.data.data;
         // this.list = response.data;
       });
-    }
-  }
+    },
+    more() {
+      this.$router.push({
+        path: "contentList/" + this.bizType,
+      });
+    },
+  },
+  filters: {
+    ellipsis(value) {
+      if (!value) return "";
+      let length = value.length;
+      if (length > 10) {
+        return value.slice(0, 10) + "...";
+      }
+      return value;
+    },
+  },
 };
 </script>
+<style scoped>
+.headName {
+  text-align: center;
+}
+</style>

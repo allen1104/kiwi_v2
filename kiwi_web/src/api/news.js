@@ -16,6 +16,14 @@ export default {
     });
     return req;
   },
+  findPageList(requestBody) {
+    const req = request({
+      method: "post",
+      url: "/news/config/findPageList",
+      data: requestBody
+    });
+    return req;
+  },
   findNewsById(id) {
     const req = request({
       method: "get",

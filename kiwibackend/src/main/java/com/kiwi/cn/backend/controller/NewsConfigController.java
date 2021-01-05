@@ -1,6 +1,7 @@
 package com.kiwi.cn.backend.controller;
 
 import com.kiwi.cn.backend.common.service.impl.ServiceResult;
+import com.kiwi.cn.backend.common.vo.RequestVO;
 import com.kiwi.cn.backend.service.api.INewsService;
 import com.kiwi.cn.backend.vo.NewsVO;
 import io.swagger.annotations.Api;
@@ -31,9 +32,16 @@ public class NewsConfigController {
             @ApiImplicitParam(name = "page", value = "页码", required = true, dataType = "Integer"),
             @ApiImplicitParam(name = "size", value = "每页大小", required = true, dataType = "Integer"),
     })
+
     @PostMapping(path = "/findPageList/{size}/{page}")
     public ServiceResult<Page<NewsVO>, String> findPageList(@PathVariable Integer page, @PathVariable Integer size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("newsId").descending());
+        return ServiceResult.success(service.findPageList(pageable));
+    }
+
+    @PostMapping(path = "/findPageList")
+    public ServiceResult<Page<NewsVO>, String> findPageList(@RequestBody RequestVO requestVO) {
+        Pageable pageable = requestVO.getPageVO().build(Sort.by("newsId").descending());
         return ServiceResult.success(service.findPageList(pageable));
     }
 

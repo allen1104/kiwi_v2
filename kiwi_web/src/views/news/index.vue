@@ -80,11 +80,11 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage"
+      :current-page="page.currentPage"
       :page-sizes="[10, 20, 50]"
-      :page-size="pageSize"
+      :page-size="page.pageSize"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="total"
+      :total="page.total"
     >
     </el-pagination>
   </div>
@@ -96,9 +96,11 @@ export default {
   data() {
     return {
       list: [],
-      pageSize: 10,
-      currentPage: 1,
-      total: 0,
+      page: {
+        pageSize: 10,
+        currentPage: 1,
+        total: 0,
+      },
       searchMap: {
         name: "",
         code: ""
@@ -117,13 +119,13 @@ export default {
 
   methods: {
     fetchData() {
-      let page = this.currentPage - 1;
-      let size = this.pageSize;
-      this.loading = true;
-      newsApi.findPageList(page, size).then(response => {
-        console.info(response.data);
-        this.currentPage = response.data.data.number + 1;
-        this.total = response.data.data.totalElements;
+      let requestBody = {
+        pageVO: this.page,
+        searchParams: null
+      };
+      newsApi.findPageList(requestBody).then(response => {
+        this.page.currentPage = response.data.data.number + 1;
+        this.page.total = response.data.data.totalElements;
         this.list = response.data.data.content;
         this.loading = false;
       });
@@ -132,7 +134,6 @@ export default {
       this.$router.push("/admin/newsList/add");
     },
     handleEdit(row) {
-      console.info(row.newsId);
       this.$router.push({
         name: "newsUpdate",
         params: {
@@ -158,12 +159,12 @@ export default {
       });
     },
     handleSizeChange(val) {
-      this.pageSize = val;
-      this.currentPage = 1;
+      this.page.pageSize = val;
+      this.page.currentPage = 1;
       this.fetchData();
     },
     handleCurrentChange(val) {
-      this.currentPage = val;
+      this.page.currentPage = val;
       this.fetchData();
     },
     formatterIsCarousel(row, column, cellValue, index) {

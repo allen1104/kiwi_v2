@@ -1,6 +1,7 @@
 package com.kiwi.cn.backend.controller;
 
 import com.kiwi.cn.backend.common.service.impl.ServiceResult;
+import com.kiwi.cn.backend.common.vo.RequestVO;
 import com.kiwi.cn.backend.constant.KiwiCommenConstants;
 import com.kiwi.cn.backend.service.api.INewsService;
 import com.kiwi.cn.backend.vo.NewsVO;
@@ -39,10 +40,10 @@ public class NewsController {
     }
 
     @Operation(summary = "首页展示查询")
-    @GetMapping("/index")
-    public ServiceResult getIndex() {
+    @GetMapping("/index/{type}")
+    public ServiceResult getIndex(@PathVariable String type) {
         Pageable pageable = PageRequest.of(0, KiwiCommenConstants.INDEX_SHOW_COUNT, Sort.by("newsId").descending());
-        Page<NewsVO> newsPage = service.findNews(pageable);
+        Page<NewsVO> newsPage = service.findNews(pageable, type);
         return ServiceResult.success(newsPage.getContent());
     }
 
@@ -50,5 +51,11 @@ public class NewsController {
     @GetMapping("/getCarousel")
     public ServiceResult getCarousel() {
         return ServiceResult.success(service.findCarousel());
+    }
+
+    @PostMapping(path = "/findPageList/{type}")
+    public ServiceResult<Page<NewsVO>, String> findPageList(@PathVariable String type, @RequestBody RequestVO requestVO) {
+        Pageable pageable = requestVO.getPageVO().build(Sort.by("newsId").descending());
+        return ServiceResult.success(service.findPageListByType(pageable, type));
     }
 }

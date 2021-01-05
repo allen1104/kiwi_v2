@@ -23,6 +23,11 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
+    public Page<NewsVO> findPageListByType(Pageable pageable, String type) {
+        return dao.findPageListByType(pageable, type);
+    }
+
+    @Override
     public Optional<NewsVO> findById(Integer id) {
         return dao.findById(id);
     }
@@ -43,7 +48,7 @@ public class NewsServiceImpl implements INewsService {
     }
 
     @Override
-    public Page<NewsVO> findNews(Pageable pageable) {
-        return dao.findNews(pageable);
+    public Page<NewsVO> findNews(Pageable pageable, String type) {
+        return dao.findNews(pageable, type);
     }
 }

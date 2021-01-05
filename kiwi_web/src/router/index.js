@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Index from "../views/index";
-import newsDetail from "../views/newsDetail";
+import NewsDetail from "../views/newsDetail";
 import Layout from "@/components/Layout.vue";
 import Home from "../views/home/";
 import CarouselList from "../views/carousel/";
@@ -9,6 +9,7 @@ import CarouselAddOrUpdate from "../views/carousel/addOrUpdate.vue";
 import NewsList from "../views/news/";
 import NewsAddOrUpdate from "../views/news/addOrUpdate.vue";
 import Login from "../views/login/";
+import ContentList from "../views/context/list";
 Vue.use(VueRouter);
 
 const routes = [
@@ -28,7 +29,13 @@ const routes = [
     // 新聞詳情
     path: "/newsDetail/:id",
     name: "newsDetail", //路由名称
-    component: newsDetail
+    component: NewsDetail
+  },
+  {
+    // 新聞詳情
+    path: "/contentList/:type",
+    name: "contentList", //路由名称
+    component: ContentList
   },
   {
     path: "/admin",

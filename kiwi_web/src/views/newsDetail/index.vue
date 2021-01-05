@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: 10px">
+  <div style="margin: 10px" v-loading="loading">
     <div
       style="display: block;margin: 0 auto;max-width: 700px;text-align: center"
     >
@@ -17,7 +17,8 @@ export default {
     return {
       title: null,
       pubdate: null,
-      editorData: null
+      editorData: null,
+      loading: true,
     };
   },
   created() {
@@ -30,10 +31,10 @@ export default {
     },
     getNewsById(id) {
       newApi.findNewsById(id).then(response => {
-        console.log(response.data);
         this.title = response.data.data.title;
         this.pubdate = response.data.data.pubdate;
         this.editorData = response.data.data.richContent.content;
+        this.loading = false;
       });
     }
   }

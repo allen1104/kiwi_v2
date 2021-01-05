@@ -15,8 +15,10 @@ public interface INewsDao extends JpaRepository<NewsVO, Integer> {
 
     @Query(value = "select new NewsVO(newsId, title, titleUrl, description, status, pubdate, bizType, isCarousel) from NewsVO t where t.isCarousel = 1 and t.status = 1 and t.bizType = 1")
     List<NewsVO> findCarousel();
-//    @Query(value = "from NewsVO t where t.status = 1 and t.bizType = 1")
-//    Page<NewsVO> findNews(Pageable pageable);
-    @Query(value = "select new NewsVO(newsId, title, titleUrl, description, status, pubdate, bizType, isCarousel) from NewsVO t where t.status = 1 and t.bizType = 1")
-    Page<NewsVO> findNews(Pageable pageable);
+
+    @Query(value = "select new NewsVO(newsId, title, titleUrl, description, status, pubdate, bizType, isCarousel) from NewsVO t where t.status = 1 and t.bizType = ?1")
+    Page<NewsVO> findNews(Pageable pageable, String type);
+
+    @Query(value = "select new NewsVO(newsId, title, titleUrl, description, status, pubdate, bizType, isCarousel) from NewsVO t where t.status = 1 and t.bizType = ?1")
+    Page<NewsVO> findPageListByType(Pageable pageable, String type);
 }
