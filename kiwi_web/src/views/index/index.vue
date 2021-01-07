@@ -28,27 +28,27 @@ export default {
       items: [
           {
             title: "联盟简介",
-            bizType: "1",
+            bizType: "10",
           },
           {
             title: "联盟活动",
-            bizType: "2",
+            bizType: "20",
           },
           {
             title: "通知公告",
-            bizType: "3",
+            bizType: "30",
           },
           {
             title: "实例展示",
-            bizType: "4",
+            bizType: "40",
           },
           {
             title: "技术园地",
-            bizType: "5",
+            bizType: "50",
           },
           {
             title: "相关政策",
-            bizType: "6",
+            bizType: "60",
           }
         ]
     };

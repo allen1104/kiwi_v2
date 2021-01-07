@@ -17,9 +17,6 @@ public class QiniuServiceImpl implements QiniuService {
 
     @Override
     public String getQiniuToken() {
-//        String accessKey = "JVvJtVWZaxRo8-Sw-hDbVU3arggBDqK7n7YQ0s4R";
-//        String secretKey = "jK701C8jc5HdPMglL9Rbg9vag78OnDvV3WcJezC6";
-//        String bucket = "kiwialliance";
         String accessKey = qiniuConfig.getAccessKey();
         String secretKey = qiniuConfig.getSecretKey();
         String bucket = qiniuConfig.getBucket();

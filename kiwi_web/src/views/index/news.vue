@@ -85,7 +85,6 @@ export default {
     },
     getNewsIndex() {
       indexApi.getNewsIndex(this.bizType).then((response) => {
-        console.log(response.data);
         this.newsList = response.data.data;
         // this.list = response.data;
       });

@@ -108,7 +108,7 @@ export default {
         title: null,
         description: null,
         titleUrl: null,
-        bizType: "1",
+        bizType: "10",
         pubdate: new Date(),
         isCarousel: false,
         status: 0,
