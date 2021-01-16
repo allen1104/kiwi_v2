@@ -40,9 +40,9 @@ public class NewsController {
     }
 
     @Operation(summary = "首页展示查询")
-    @GetMapping("/index/{type}")
-    public ServiceResult getIndex(@PathVariable String type) {
-        Pageable pageable = PageRequest.of(0, KiwiCommenConstants.INDEX_SHOW_COUNT, Sort.by("newsId").descending());
+    @GetMapping("/index/{type}/{size}")
+    public ServiceResult getIndex(@PathVariable String type, @PathVariable Integer size) {
+        Pageable pageable = PageRequest.of(0, size, Sort.by("newsId").descending());
         Page<NewsVO> newsPage = service.findNews(pageable, type);
         return ServiceResult.success(newsPage.getContent());
     }

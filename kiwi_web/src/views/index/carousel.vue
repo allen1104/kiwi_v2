@@ -1,12 +1,12 @@
 <template>
   <div class="block">
     <span class="demonstration">主圖</span>
-    <el-carousel :height="carouselHeight">
-      <el-carousel-item v-for="item in list" :key="item.newsId">
+    <el-carousel :height="carouselHeight" type="card">
+      <el-carousel-item v-for="item in list" :key="item.newsId" >
         <!-- <h3 class="small">{{ item }}</h3> -->
         <!-- <router-link to="/newsDetail"> -->
         <!-- </router-link> -->
-        <img :src="item.titleUrl" class="image" />
+        <img :src="item.titleUrl?item.titleUrl:'http://cdn.kiwialliance.com/default.ico'" class="image" />
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -23,9 +23,9 @@ export default {
   created() {
     this.getCarousel();
     if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-      this.carouselHeight = "180px";
+      this.carouselHeight = "130px";
     } else {
-      this.carouselHeight = "600px";
+      this.carouselHeight = "420px";
     }
   },
   methods: {
