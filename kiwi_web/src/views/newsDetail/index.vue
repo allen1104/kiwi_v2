@@ -9,7 +9,7 @@
       "
     >
       <div style="font-size: x-large">{{ title }}</div>
-      <time class="time">{{ this.$moment(pubdate).format("YYYY-DD-MM") }}</time>
+      <time class="time">{{ this.$moment(pubdate).format("YYYY-MM-DD") }}</time>
       <div v-html="editorData" style="text-align: left"></div>
       <el-button type="primary" @click="back">返回</el-button>
     </div>

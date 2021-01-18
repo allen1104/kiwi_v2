@@ -23,7 +23,7 @@ export default {
   created() {
     this.getCarousel();
     if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-      this.carouselHeight = "130px";
+      this.carouselHeight = "120px";
     } else {
       this.carouselHeight = "420px";
     }
