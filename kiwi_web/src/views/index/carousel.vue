@@ -2,11 +2,20 @@
   <div class="block">
     <span class="demonstration">主圖</span>
     <el-carousel :height="carouselHeight" type="card">
-      <el-carousel-item v-for="item in list" :key="item.newsId" >
+      <el-carousel-item v-for="item in list" :key="item.newsId">
         <!-- <h3 class="small">{{ item }}</h3> -->
         <!-- <router-link to="/newsDetail"> -->
         <!-- </router-link> -->
-        <img :src="item.titleUrl?item.titleUrl:'http://cdn.kiwialliance.com/default.ico'" class="image" />
+        <el-image
+          :src="
+            item.titleUrl
+              ? item.titleUrl
+              : 'http://cdn.kiwialliance.com/default.ico'
+          "
+          @click="goDetail(item.newsId)"
+          fit="contain"
+          class="image"
+        />
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -17,21 +26,26 @@ export default {
   data() {
     return {
       list: [],
-      carouselHeight: "180px",
+      carouselHeight: "7rem",
     };
   },
   created() {
     this.getCarousel();
     if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-      this.carouselHeight = "120px";
+      this.carouselHeight = (document.body.clientWidth - 40) / 2.75 + "px";
     } else {
-      this.carouselHeight = "420px";
+      this.carouselHeight = (document.body.clientWidth - 40) / 2.75 + "px";
     }
   },
   methods: {
     getCarousel() {
       newsApi.getCarousel().then((reponse) => {
         this.list = reponse.data.data;
+      });
+    },
+    goDetail(id) {
+      this.$router.push({
+        path: "newsDetail/" + id,
       });
     },
   },

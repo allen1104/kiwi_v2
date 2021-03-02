@@ -8,13 +8,15 @@
       <template v-if="newsList.length > 0">
         <el-col :span="spanSize" v-for="item in newsList" :key="item.newsId">
           <el-card :body-style="{ padding: '0px', margin: '5px' }">
-            <img
+            <el-image
               :src="
                 item.titleUrl
                   ? item.titleUrl
                   : 'http://cdn.kiwialliance.com/default.ico'
               "
+              @click="goDetail(item.newsId)"
               class="image"
+              fit="contain"
             />
             <div style="padding: 1rem">
               <div style="height: 30px">{{ item.title | ellipsis }}</div>
