@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     back() {
-      this.$router.go(-1);
+      this.$router.back();
     },
     getNewsById(id) {
       newApi.findNewsById(id).then((response) => {

@@ -35,13 +35,13 @@ public class NewsConfigController {
 
     @PostMapping(path = "/findPageList/{size}/{page}")
     public ServiceResult<Page<NewsVO>, String> findPageList(@PathVariable Integer page, @PathVariable Integer size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("newsId").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("pubdate").descending());
         return ServiceResult.success(service.findPageList(pageable));
     }
 
     @PostMapping(path = "/findPageList")
     public ServiceResult<Page<NewsVO>, String> findPageList(@RequestBody RequestVO requestVO) {
-        Pageable pageable = requestVO.getPageVO().build(Sort.by("newsId").descending());
+        Pageable pageable = requestVO.getPageVO().build(Sort.by("pubdate").descending());
         return ServiceResult.success(service.findPageList(pageable));
     }
 

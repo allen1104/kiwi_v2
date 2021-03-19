@@ -228,7 +228,7 @@ export default {
             message: "发布成功",
             type: "success",
           });
-          this.$router.go(-1);
+          this.$router.back();
         } else {
           let message = response.data.message;
           this.$message({
@@ -239,7 +239,7 @@ export default {
       });
     },
     goback() {
-      this.$router.go(-1);
+      this.$router.back();
     },
     save() {
       newsApi.save(this.form).then((response) => {

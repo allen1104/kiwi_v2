@@ -42,7 +42,7 @@ public class NewsController {
     @Operation(summary = "首页展示查询")
     @GetMapping("/index/{type}/{size}")
     public ServiceResult getIndex(@PathVariable String type, @PathVariable Integer size) {
-        Pageable pageable = PageRequest.of(0, size, Sort.by("newsId").descending());
+        Pageable pageable = PageRequest.of(0, size, Sort.by("pubdate").descending());
         Page<NewsVO> newsPage = service.findNews(pageable, type);
         return ServiceResult.success(newsPage.getContent());
     }
@@ -55,7 +55,7 @@ public class NewsController {
 
     @PostMapping(path = "/findPageList/{type}")
     public ServiceResult<Page<NewsVO>, String> findPageList(@PathVariable String type, @RequestBody RequestVO requestVO) {
-        Pageable pageable = requestVO.getPageVO().build(Sort.by("newsId").descending());
+        Pageable pageable = requestVO.getPageVO().build(Sort.by("pubdate").descending());
         return ServiceResult.success(service.findPageListByType(pageable, type));
     }
 }
