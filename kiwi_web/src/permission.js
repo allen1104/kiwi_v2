@@ -12,6 +12,7 @@ import router from "./router";
 import store from "./store";
 
 router.beforeEach((to, from, next) => {
+  window.document.title = '全国猕猴桃联盟';
   //如果不是admin路由就不需要登陆
   if (to.path.indexOf("/admin") >= 0) {
     // 1. 获取token

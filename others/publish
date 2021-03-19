@@ -37,6 +37,7 @@ rm -rf /usr/soft/kiwi_backend/nohup.out
 cp -rf /usr/soft/kiwi_src/kiwi_v2/kiwibackend/target/backend-0.0.1-SNAPSHOT.jar /usr/soft/kiwi_backend/
 #7、启动后端服务器
 nohup java -jar /usr/soft/kiwi_backend/backend-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod &
+nohup java -jar /opt/soft/kiwi_backend/backend-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod &
 #8、删除前端代码
 rm -rf /usr/local/nginx/html/kiwi_web
 #9、复制前端代码

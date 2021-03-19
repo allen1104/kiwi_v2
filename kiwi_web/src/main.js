@@ -15,7 +15,6 @@ import "./permission";
 
 Vue.config.productionTip = process.env.NODE_ENV === "porduction";
 
-console.log(process.env.NODE_ENV);
 new Vue({
   router,
   store,
